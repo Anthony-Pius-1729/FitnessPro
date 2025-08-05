@@ -6,21 +6,21 @@ import Header from "./Components/Header";
 import HomePage from "./Components/HomePage";
 import Footer from "./Components/Footer";
 import FitnessDashboard from "./Components/Dashboard";
+import AIChat from "./Components/AIChat";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route path="/welcome-user" element={<LandingPage />}></Route>
-          <Route path="/dashboard" element={<FitnessDashboard />} />
-          <Route path="/login" element={<Login />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<HomePage />} />
+        <Route path="/welcome-user" element={<LandingPage />} />
+        <Route path="/Dashboard" element={<FitnessDashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/AI" element={<AIChat />} />
+      </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }
 

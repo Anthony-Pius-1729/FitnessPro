@@ -23,10 +23,13 @@ import {
 } from "lucide-react";
 
 import vid from "../assets/vid2.mp4";
+import vid2 from "../assets/vid1.mp4";
 import TestimonialsAndFAQ from "./FaqTestimonial";
 import FitnessDashboard from "./Dashboard";
 
 const HomePage = () => {
+  // const [video1, setVideo1] = useState(vid);
+  const [next, setNext] = useState(true);
   const Services = [
     {
       heading: "Personal Training Programs",
@@ -104,10 +107,43 @@ const HomePage = () => {
     },
   ];
 
+  useEffect(() => {
+    const changeBackground = () => {
+      setTimeout(() => {
+        setNext(!next);
+      }, 2000);
+    };
+
+    changeBackground();
+  }, [next]);
+
   return (
     <>
       <div className="relative font-[Poppins] bg-slate-50">
-        <video src={vid} loop autoPlay muted />
+        <div className="relative w-full h-full">
+          {/* First video */}
+          <video
+            src={vid}
+            loop
+            autoPlay
+            muted
+            className={` w-full h-full object-cover transition-opacity duration-500 ${
+              next ? "opacity-0" : "opacity-100"
+            }`}
+          />
+
+          {/* Second video */}
+          <video
+            src={vid2}
+            loop
+            autoPlay
+            muted
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
+              next ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </div>
+
         <div className="absolute top-28 left-16 w-[35rem] h-[30rem] bg-white/90 backdrop-blur-sm drop-shadow-2xl rounded-2xl border border-emerald-100 p-10 max-h-full">
           <div className="relative">
             <i className="fa-solid fa-bolt absolute text-5xl text-emerald-500 -top-16 -right-14 animate-bounce"></i>
