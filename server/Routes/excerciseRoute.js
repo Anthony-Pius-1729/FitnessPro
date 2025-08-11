@@ -59,7 +59,7 @@ router.get("/all-exercises/:id", async (req, res) => {
   try {
     const data = await Exercise.findById({ _id: id });
     res.json(data);
-    res.json(allExercises[id]);
+    // res.json(allExercises[id]);
   } catch (error) {
     console.error("Error in /all-exercises/:id:", error);
     res.status(500).send(error.message);
@@ -67,23 +67,5 @@ router.get("/all-exercises/:id", async (req, res) => {
 });
 
 //GET AI RECOMMENDATIONS BASED ON CURRENT EXERCISES
-router.post("/recommendations", async (req, res) => {
-  const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
-  async function main() {
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: `Give ONLY bullet point list of all exercises for improving ${req?.body?.message} return  EXACTLY a JSON array in this format as an example no other words or characters whatsoever do not write thhe backticks and the word json just this [{
-    "name": "Seated Cable Rows",
-    "type": "strength",
-    "muscle": "middle_back",
-    "equipment": "cable",
-    "difficulty": "beginner",
-    "instructions": "Sit at a low pulley cable machine with your feet on the platform and knees slightly bent. Grasp the handle with both hands. Sit up straight with your back perpendicular to the floor. Pull the handle towards your abdomen, squeezing your shoulder blades together. Slowly extend your arms back to the starting position. Repeat for the desired number of repetitions."
-    }]`,
-    });
-    res.json(response.text);
-  }
-  main();
-});
 
 export default router;

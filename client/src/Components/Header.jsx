@@ -88,10 +88,12 @@ const Header = () => {
               </button>
 
               {/* Login/Profile Button */}
-              <button className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
-                <User className="w-4 h-4" />
-                <span className="hidden sm:inline">Login</span>
-              </button>
+              <Link to="/Login">
+                <button className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                  <User className="w-4 h-4" />
+                  <span className="hidden sm:inline">Login</span>
+                </button>
+              </Link>
 
               {/* Mobile Menu Toggle */}
               <button

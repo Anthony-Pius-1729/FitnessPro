@@ -6,6 +6,7 @@ import appRoutes from "./Routes/appRoutes.js";
 import exerciseRoute from "./Routes/excerciseRoute.js";
 import dietRoutes from "./Routes/dietRoutes.js";
 import freddyAI from "./Routes/aiChatAPI.js";
+import topicGenerator from "./Routes/aiChatAPI.js";
 import mongoose from "mongoose";
 import { configDotenv } from "dotenv";
 
@@ -18,6 +19,7 @@ app.use("/user", appRoutes);
 app.use("/exercises", exerciseRoute);
 app.use("/diet", dietRoutes);
 app.use("/AI-CHAT", freddyAI);
+app.use("/AI-CHAT", topicGenerator);
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
   console.log("Sucessfully established connetion with database");
