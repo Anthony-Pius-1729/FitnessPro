@@ -20,7 +20,6 @@ router.post("/login", async (req, res) => {
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
     if (isPasswordValid) {
       const token = jwt.sign(
         { email: user.email, id: user._id },
@@ -43,16 +42,19 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const { email, password } = req.body.data;
+    const { name, email, password } = req.body;
+    console.log(name, email, password);
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existingUser = await User.find({ email, name });
+    console.log(existingUser);
+    if (existingUser.length > 0) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
+      name: name,
       email: email,
       password: hashedPassword,
     });
@@ -71,6 +73,8 @@ router.post("/register", async (req, res) => {
         token: token,
       });
     }
+
+    console.log(`${name} Signed Up Succesfully`);
   } catch (error) {
     console.error("Registration error:", error);
     res.status(500).json({ message: "Internal server error" });

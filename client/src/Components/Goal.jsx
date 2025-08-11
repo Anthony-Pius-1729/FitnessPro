@@ -3,33 +3,33 @@ import { Target, Plus, Check, Edit2, Trash2 } from "lucide-react";
 
 const GoalComponent = () => {
   const [goals, setGoals] = useState([
-    {
-      id: 1,
-      title: "Lose 10 pounds",
-      target: 10,
-      current: 3,
-      unit: "lbs",
-      category: "Weight Loss",
-      deadline: "2025-10-01",
-    },
-    {
-      id: 2,
-      title: "Run 5K under 25 minutes",
-      target: 25,
-      current: 28,
-      unit: "minutes",
-      category: "Cardio",
-      deadline: "2025-09-15",
-    },
-    {
-      id: 3,
-      title: "Bench Press 150 lbs",
-      target: 150,
-      current: 135,
-      unit: "lbs",
-      category: "Strength",
-      deadline: "2025-11-01",
-    },
+    // {
+    //   id: 1,
+    //   title: "Lose 10 pounds",
+    //   target: 10,
+    //   current: 3,
+    //   unit: "lbs",
+    //   category: "Weight Loss",
+    //   deadline: "2025-10-01",
+    // },
+    // {
+    //   id: 2,
+    //   title: "Run 5K under 25 minutes",
+    //   target: 25,
+    //   current: 28,
+    //   unit: "minutes",
+    //   category: "Cardio",
+    //   deadline: "2025-09-15",
+    // },
+    // {
+    //   id: 3,
+    //   title: "Bench Press 150 lbs",
+    //   target: 150,
+    //   current: 135,
+    //   unit: "lbs",
+    //   category: "Strength",
+    //   deadline: "2025-11-01",
+    // },
   ]);
 
   const [showAddForm, setShowAddForm] = useState(false);
@@ -115,7 +115,7 @@ const GoalComponent = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white">
+    <div className="max-w-4xl mx-auto p-6 bg-white min-h-screen h-screen">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
@@ -137,7 +137,7 @@ const GoalComponent = () => {
       </div>
 
       {showAddForm && (
-        <div className="mb-8 p-6 bg-gray-50 rounded-lg border">
+        <div className="mb-8 p-6 bg-gray-50 rounded-lg border ">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Add New Goal
           </h3>
@@ -234,7 +234,7 @@ const GoalComponent = () => {
               className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <h3 className="text-lg font-semibold text-gray-800 mb-1">
                     {goal.title}
                   </h3>
@@ -294,7 +294,7 @@ const GoalComponent = () => {
                   onChange={(e) =>
                     handleUpdateProgress(goal.id, e.target.value)
                   }
-                  className="flex-1 px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="flex-1 w-1/2 px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                   placeholder="Update progress"
                 />
                 <button

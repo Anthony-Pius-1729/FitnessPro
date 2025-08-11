@@ -14,6 +14,7 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import FitnessDataForm from "./Components/FitnessDataForm";
 import Checkout from "./Components/Checkout";
 import AuthContext from "../Contexts/AuthContext";
+import GoalComponent from "./Components/Goal";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -39,9 +40,10 @@ function App() {
           </Route>
 
           <Route path="/Login" element={<Login />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/fitness-data" element={<FitnessDataForm />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/Register" element={<SignUp />} />
+          <Route path="/Fitness-data" element={<FitnessDataForm />} />
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/Goal" element={<GoalComponent />} />
         </Routes>
         <Footer />
       </BrowserRouter>

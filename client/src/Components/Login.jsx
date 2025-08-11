@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../../Contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { handleUserSession } = useContext(AuthContext);
+  console.log(handleUserSession);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setEmail(e.currentTarget.value);
@@ -16,10 +20,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:8080/api/login", {
+      const res = await fetch("http://localhost:8080/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("_token")}`,
         },
         body: JSON.stringify({
           data: {
@@ -28,7 +33,16 @@ const Login = () => {
           },
         }),
       });
-      const data = await res.json();
+      console.log(res.status, typeof res.status);
+      if (res.status == 200) {
+        const data = await res.json();
+        const { message, token } = data;
+        localStorage.setItem("_token", token);
+        console.log("Login data", message);
+
+        handleUserSession(true);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
