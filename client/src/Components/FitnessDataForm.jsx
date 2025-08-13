@@ -547,7 +547,23 @@ const FitnessDataForm = () => {
     exercises: [],
   });
 
-  const handleAddMeal = (meal) => {
+  const handleAddMeal = async (meal) => {
+    try {
+      const res = await fetch("http://localhost:8080/diet/addMeal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: { meal } }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log("Error occured", error);
+      throw new Error("Error fetching data");
+    }
+
     const newMeal = { ...meal, id: Date.now() };
     setFormData((prev) => ({ ...prev, meals: [...prev.meals, newMeal] }));
   };
@@ -559,7 +575,22 @@ const FitnessDataForm = () => {
     }));
   };
 
-  const handleAddExercise = (exercise) => {
+  const handleAddExercise = async (exercise) => {
+    try {
+      const res = await fetch("http://localhost:8080/exercises/addExercise", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: { exercise } }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log("Error occured", error);
+      throw new Error("Error fetching data");
+    }
     const newExercise = { ...exercise, id: Date.now() };
     setFormData((prev) => ({
       ...prev,
@@ -567,11 +598,36 @@ const FitnessDataForm = () => {
     }));
   };
 
-  const handleRemoveExercise = (exerciseId) => {
-    setFormData((prev) => ({
-      ...prev,
-      exercises: prev.exercises.filter((ex) => ex.id !== exerciseId),
-    }));
+  const handleRemoveExercise = async (exerciseId) => {
+    try {
+      console.log(exerciseId, typeof exerciseId);
+      const id = exerciseId;
+
+      const response = await fetch(
+        `http://localhost:8080/exercises/workout-logs/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ exerciseId: id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Exercise removed successfully:", data);
+
+      setFormData((prev) => ({
+        ...prev,
+        exercises: prev.exercises.filter((ex) => ex.id !== exerciseId),
+      }));
+    } catch (error) {
+      console.error("An Error Occurred:", error);
+    }
   };
 
   const handleSubmit = (e) => {

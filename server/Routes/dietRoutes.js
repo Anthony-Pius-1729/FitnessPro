@@ -2,6 +2,7 @@ import express from "express";
 import { configDotenv } from "dotenv";
 import Meal from "../Models/mealSchema.js";
 import Diet from "../Models/dietPlansSchema.js";
+import mealLog from "../Models/MealLog.js";
 configDotenv();
 
 const router = express.Router();
@@ -173,6 +174,27 @@ router.get("/Lunch", async (req, res) => {
 
 router.get("/Dinner", async (req, res) => {
   res.json(dinner);
+});
+
+router.post("/addMeal", async (req, res) => {
+  const { meal } = req?.body?.data;
+
+  const newMealLog = new mealLog({
+    mealType: meal.type,
+    food: meal.name,
+    calories: meal.calories,
+    protein: meal.protein,
+    carbs: meal.carbs,
+    fat: meal.fat,
+  });
+
+  const savedMealLog = await newMealLog.save();
+
+  if (savedMealLog) {
+    console.log("Meal Log saved");
+  }
+
+  res.status(200).json(savedMealLog);
 });
 
 export default router;

@@ -41,7 +41,7 @@ function App() {
 
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<SignUp />} />
-          <Route path="/Fitness-data" element={<FitnessDataForm />} />
+          <Route path="/Fitness" element={<FitnessDataForm />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Goal" element={<GoalComponent />} />
         </Routes>

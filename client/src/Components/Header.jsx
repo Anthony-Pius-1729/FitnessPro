@@ -11,17 +11,25 @@ import {
   Calendar,
   TrendingUp,
   ChevronDown,
+  Goal,
+  Brain,
 } from "lucide-react";
 import logo from "../assets/logo-main.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState("Dashboard");
+  const [activeNav, setActiveNav] = useState("Programme");
 
   const navItems = [
     { name: "Programme", icon: Target },
+
+    { name: "Fitness Log", icon: Dumbbell },
+
+    { name: "Goal", icon: Goal },
+
+    { name: "AI FitBuddy", icon: Brain },
+
     { name: "Dashboard", icon: TrendingUp },
-    { name: "AI FitBuddy", icon: Dumbbell },
   ];
 
   return (
